@@ -19,11 +19,26 @@
 */
 const fetch = require('node-fetch');
 
-fetch('https://jsonplaceholder.typicode.com/todos/1').then(response => {
- return response.json()  // type of Response, not a json
+// fetch('https://jsonplaceholder.typicode.com/todos/1').then(response => {
+//  return response.json()  // type of Response, not a json
 
-})
-.then (jsonResult => {
+// })
+// .then (jsonResult => {
+//     console.log(jsonResult);
+//     console.log('title is', jsonResult.title);
+// })
+
+const getToDo = (id) => {
+   return new Promise((resolve, reject) => {
+        fetch('https://jsonplaceholder.typicode.com/todos/' + id)
+        .then(response => {
+            resolve(response.json());
+        })
+       
+    })
+}
+
+getToDo('5').then(jsonResult => {
     console.log(jsonResult);
-    console.log('title is', jsonResult.title);
 })
+
