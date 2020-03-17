@@ -28,17 +28,49 @@ const fetch = require('node-fetch');
 //     console.log('title is', jsonResult.title);
 // })
 
-const getToDo = (id) => {
-   return new Promise((resolve, reject) => {
-        fetch('https://jsonplaceholder.typicode.com/todos/' + id)
-        .then(response => {
-            resolve(response.json());
-        })
+///////////// fara async away
+// const getToDo = (id) => {
+//    return new Promise((resolve, reject) => {
+//         fetch('https://jsonplaceholder.typicode.com/todos/' + id)
+//         .then(response => {
+//             resolve(response.json());
+//         })
        
-    })
-}
+//     })
+// }
+
+////rescris cu async await cel de sus
+const getToDo = async (id) => {
+        const fetchedResult = await  fetch('https://jsonplaceholder.typicode.com/todos/' + id); ///fetch returneaza un promise, si await returneaza reultatul unui promise
+        /// fethedResult is a promise right now
+        const jsonResult = await fetchedResult.json();
+         
+        return jsonResult;
+
+        //  fetch('https://jsonplaceholder.typicode.com/todos/' + id)
+        //  .then(response => {
+        //      resolve(response.json());
+        //  })
+        
+    
+ }
+ 
+
+
 
 getToDo('5').then(jsonResult => {
     console.log(jsonResult);
 })
+.catch(e => {
+    console.log(e);
+})
 
+// const getToDo = async (no) => {   ////async returneza un promise
+//     // const result = await myPromise();
+//     /// await someAsyncFunction(); wait for promise to finish, could be used just inside the async block
+//     /// after await resolves, run the following lines 
+//     return 'some string';  /// return Promise.resolve('some string')
+//     //by default return a Promise.resolve(undefined)
+// }
+
+// console.log(getToDo());
