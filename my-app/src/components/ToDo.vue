@@ -13,6 +13,11 @@ export default {
           text: String,
           inputName: String,
           inputValue: String
+},
+computed: {
+    id() {
+        return `${this.inputName}_id`
+    }
 }
 }
 </script>
